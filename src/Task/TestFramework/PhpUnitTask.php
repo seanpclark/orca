@@ -208,6 +208,7 @@ class PhpUnitTask extends TestFrameworkBase {
     try {
       $command = [
         'phpunit',
+        "--coverage-clover={$this->getCoveragePath()}/clover.xml",
         '--colors=always',
         '--debug',
         "--configuration={$this->fixture->getPath('docroot/core/phpunit.xml.dist')}",
@@ -222,6 +223,18 @@ class PhpUnitTask extends TestFrameworkBase {
     catch (ProcessFailedException $e) {
       throw new TaskFailureException();
     }
+  }
+
+  /**
+   * Gets the path for coverage files.
+   *
+   * @return string
+   *   The path for coverage files.
+   */
+  protected function getCoveragePath(): string {
+    $subdir = explode(DIRECTORY_SEPARATOR, $this->getPath());
+    $subdir = end($subdir);
+    return "{$this->projectDir}/var/coverage/{$subdir}";
   }
 
 }

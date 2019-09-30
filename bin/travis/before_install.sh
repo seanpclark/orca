@@ -23,9 +23,6 @@ echo "$TRAVIS_NODE_VERSION"
 # Display the Yarn version.
 yarn --version
 
-# Disable Xdebug.
-phpenv config-rm xdebug.ini
-
 {
   # Remove PHP memory limit.
   echo 'memory_limit = -1'
